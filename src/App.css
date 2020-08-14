@@ -1,0 +1,8 @@
+.main-container{
+    margin: 0 20em 0 20em;
+    border:solid 1px black;
+}
+
+.d-none{
+    display: none;
+}
