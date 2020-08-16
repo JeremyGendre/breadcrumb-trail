@@ -70,7 +70,13 @@ export default class BreadcrumTrail extends Component{
                         elementClasses += ' breadcrum-content-hidden'
                     }
                     return (
-                        <div className={elementClasses} key={index}>{tab}</div>
+                        <div className={elementClasses} key={index}>
+                            <div>{tab}</div>
+                            <div className="breadcrum-content-footer">
+                                <div className="breadcrum-button button-previous">Précédent</div>
+                                <div className="breadcrum-button button-next">Suivant</div>
+                            </div>
+                        </div>
                     );
                 })}
             </div>

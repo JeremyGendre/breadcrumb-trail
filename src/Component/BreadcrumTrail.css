@@ -1,17 +1,25 @@
+html {
+    --main-color: #4593a1;
+}
 .breadcrum-header{
     text-align: center;
     display:flex;
+    margin-bottom: 1em;
+}
+.breadcrum-content-footer{
+    margin-top: 1em;
 }
 .breadcrum-tab-link{
     border-radius: 50%;
     margin: auto;
     display: inline-block;
-    border: solid 2px lightblue;
+    border: solid 2px var(--main-color);
     width:3em;
     color:#363636;
     height:3em;
     transition: all 0.15s ease-in-out;
     position: relative;
+    box-shadow: 0 0 4px grey;
 }
 
 .breadcrum-tab-link:hover{
@@ -19,12 +27,15 @@
 }
 
 .breadcrum-link-seen{
-    background-color: lightblue;
+    background-color: var(--main-color);
     color:white;
 }
 
 .breadcrum-link-active{
-    color: #363636;
+    color: white;
+    background-color: #5bb2c1;
+    border-color: #5bb2c1;
+    box-shadow: 0 0 10px grey;
 }
 
 .breadcrum-tab-link-inner-container{
@@ -47,12 +58,39 @@
     width:100%;
     height:100%;
     border-radius: 50%;
-    background-color: grey;
+    background-color: lightgrey;
     animation: 0.2s linear circle-anim;
     position: absolute;
     top:0;
     left:0;
     opacity: 0;
+}
+
+.breadcrum-content-footer{
+    padding-right:10%;
+    padding-left:10%;
+}
+
+.breadcrum-button{
+    box-shadow: 0 0 4px grey;
+    display:inline-block;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    border:solid 2px var(--main-color);
+    margin:0.2em;
+    padding:0.3em 0.8em 0.3em 0.8em;
+    color:white;
+    transition: all 0.15s ease-in-out;
+}
+
+.breadcrum-button:hover{
+    cursor:pointer;
+    background-color: #5bb2c1;
+    border-color: #5bb2c1;
+}
+
+.button-next{
+    float:right;
 }
 
 @keyframes circle-anim {
