@@ -21,8 +21,8 @@ export default class BreadcrumTrail extends Component{
         }
     }
 
-    handleTabLinkClick = (e) => {
-        let currentElement = e.currentTarget
+    handleTabLinkClick = (e,newIndex) => {
+        let currentElement = e.currentTarget;
         let animatedElements = document.getElementsByClassName('link-temp-grey-circle');
         for(let i = 0; i < animatedElements.length; i++){
             animatedElements[i].remove();
@@ -32,14 +32,24 @@ export default class BreadcrumTrail extends Component{
         currentElement.appendChild(newAnimatedElement);
 
         let highestTab = this.state.highestTab;
-        let newTabIndex = currentElement.getAttribute('data-index');
-        if(newTabIndex >= highestTab){
-            highestTab = newTabIndex;
+        if(newIndex >= highestTab){
+            highestTab = newIndex;
         }
 
         this.setState({
             highestTab : highestTab,
-            currentTab : newTabIndex
+            currentTab : newIndex
+        });
+    }
+
+    handleBtnClick = (e,newIndex) => {
+        let highestTab = this.state.highestTab;
+        if(newIndex >= highestTab){
+            highestTab = newIndex;
+        }
+        this.setState({
+            highestTab : highestTab,
+            currentTab : newIndex
         });
     }
 
@@ -56,7 +66,7 @@ export default class BreadcrumTrail extends Component{
                             linkClasses += ' breadcrum-link-active';
                         }
                         return (
-                            <div className={linkClasses} onClick={this.handleTabLinkClick} data-index={index} key={index}>
+                            <div className={linkClasses} onClick={(e) => this.handleTabLinkClick(e,index)} key={index}>
                                 <div className="breadcrum-tab-link-inner-container">
                                     <span>{index}</span>
                                 </div>
@@ -69,12 +79,21 @@ export default class BreadcrumTrail extends Component{
                     if(index !== parseInt(this.state.currentTab)){
                         elementClasses += ' breadcrum-content-hidden'
                     }
+
+                    let prevBtn = <div className="dummy-btn">dummy</div>;
+                    let nextBtn = prevBtn;
+                    if(index !== 0){
+                        prevBtn = <div className="breadcrum-button button-previous" onClick={(e) => this.handleBtnClick(e,index-1)}>Précédent</div>;
+                    }
+                    if(index !== this.props.content.length - 1){
+                        nextBtn = <div className="breadcrum-button button-next" onClick={(e) => this.handleBtnClick(e,index+1)}>Suivant</div>;
+                    }
                     return (
                         <div className={elementClasses} key={index}>
                             <div>{tab}</div>
                             <div className="breadcrum-content-footer">
-                                <div className="breadcrum-button button-previous">Précédent</div>
-                                <div className="breadcrum-button button-next">Suivant</div>
+                                {prevBtn}
+                                {nextBtn}
                             </div>
                         </div>
                     );

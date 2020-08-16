@@ -8,9 +8,9 @@ class App extends Component{
         super(props);
         this.state = {
             content:[
-                (<div>hehehe</div>),
-                "test3",
-                (<div>hahaha</div>),
+                (<div>test content 1</div>),
+                "test content 2",
+                (<div>test content 3</div>),
             ]
         };
     }
