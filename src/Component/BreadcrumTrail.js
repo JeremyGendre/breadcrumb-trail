@@ -43,6 +43,7 @@ export default class BreadcrumTrail extends Component{
             if(newIndex >= highestTab){
                 highestTab = newIndex;
             }
+
             this.setState({
                 highestTab : highestTab,
                 currentTab : newIndex
@@ -50,15 +51,28 @@ export default class BreadcrumTrail extends Component{
         }
     }
 
+    updateProgressBarWidth(){
+        let floatWidth = 100 / this.props.content.length;
+        let width = (this.state.currentTab * floatWidth) + (floatWidth / 2);
+        document.documentElement.style.setProperty('--progress-bar-width',width + '%');
+    }
+
     render(){
         let {onSubmit,content, encType, action} = this.props;
         if(onSubmit === undefined || !(onSubmit instanceof Function)){
             onSubmit = (e)=>{};
         }
+
+        if(content.length === 0){
+            return (<div>No data given to form</div>);
+        }
+        this.updateProgressBarWidth();
         return (
             <div className='breadcrum-container'>
                 <form id={this.formId} action={action ?? ''} onSubmit={onSubmit} encType={encType ?? ''} >
                     <div className="breadcrum-header">
+                        <div className="breadcrum-header-progress-bar breadcrum-header-progress-bar-base"/>
+                        <div className="breadcrum-header-progress-bar breadcrum-header-progress-bar-active"/>
                         {content.map((tab,index) => {
                             let linkClasses = 'breadcrum-tab-link';
                             if(index <= this.state.highestTab){
@@ -70,7 +84,7 @@ export default class BreadcrumTrail extends Component{
                             return (
                                 <div className={linkClasses} onClick={(e) => this.handleTabLinkClick(e,index)} key={index}>
                                     <div className="breadcrum-tab-link-inner-container">
-                                        <span>{index}</span>
+                                        <span>{index+1}</span>
                                     </div>
                                 </div>
                             );

@@ -10,8 +10,7 @@ class App extends Component{
             content:[
                 (<div>
                     test content 1 <br/>
-                    <input type="text" placeholder="dummy input test 1" required/><br/>
-                    <input type="text" placeholder="dummy input test 2" required/>
+                    <input type="text" placeholder="dummy input test 1" required/>
                 </div>),
                 "test content 2",
                 (<div>test content 3</div>),
