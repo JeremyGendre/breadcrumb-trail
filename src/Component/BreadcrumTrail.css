@@ -73,20 +73,18 @@ html {
 }
 
 .breadcrum-button{
-    box-shadow: 0 0 4px grey;
+    font-size: inherit;
     display:inline-block;
-    background-color: var(--main-color);
+    color: var(--main-color);
     border-radius: 5px;
-    border:solid 2px var(--main-color);
+    border:solid 1px var(--main-color);
     margin:0.2em;
     padding:0.3em 0.8em 0.3em 0.8em;
-    color:white;
     transition: all 0.15s ease-in-out;
 }
 
 .breadcrum-button:hover{
     cursor:pointer;
-    background-color: #5bb2c1;
     border-color: #5bb2c1;
 }
 
@@ -94,16 +92,27 @@ html {
     float:right;
 }
 
+.breadcrum-submit-button{
+    background-color: var(--main-color);
+    color:white;
+    box-shadow: 0 0 4px grey;
+}
+
+.breadcrum-submit-button:hover{
+    border:solid 1px #5bb2c1;
+    background-color: #5bb2c1;
+}
+
 .dummy-btn{
     margin:0.2em;
     padding:0.3em 0.8em 0.3em 0.8em;
     display: inline-block;
     opacity: 0;
-    border:solid 2px transparent;
+    border:solid 1px transparent;
 }
 
 .dummy-btn:hover{
-
+    cursor:default;
 }
 
 @keyframes circle-anim {

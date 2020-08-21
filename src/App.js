@@ -8,9 +8,15 @@ class App extends Component{
         super(props);
         this.state = {
             content:[
-                (<div>test content 1</div>),
+                (<div>
+                    test content 1 <br/>
+                    <input type="text" placeholder="dummy input test 1" required/><br/>
+                    <input type="text" placeholder="dummy input test 2" required/>
+                </div>),
                 "test content 2",
                 (<div>test content 3</div>),
+                (<div>test content 4</div>),
+                (<div>test content 5</div>),
             ]
         };
     }
@@ -18,7 +24,7 @@ class App extends Component{
     render (){
         return (
             <div className="main-container">
-                <BreadcrumTrail content={this.state.content}/>
+                <BreadcrumTrail content={this.state.content} onSubmit={(e)=>{e.preventDefault(); alert('tg');}}/>
             </div>
         );
     }

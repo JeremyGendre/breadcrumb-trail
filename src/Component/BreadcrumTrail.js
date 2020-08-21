@@ -3,6 +3,8 @@ import './BreadcrumTrail.css';
 
 export default class BreadcrumTrail extends Component{
 
+    formId = 'form-' + Math.random().toString(36).substr(2, 9);
+
     constructor(props) {
         super(props);
         if(!Array.isArray(props.content)){
@@ -31,73 +33,76 @@ export default class BreadcrumTrail extends Component{
         newAnimatedElement.className = 'link-temp-grey-circle';
         currentElement.appendChild(newAnimatedElement);
 
-        let highestTab = this.state.highestTab;
-        if(newIndex >= highestTab){
-            highestTab = newIndex;
-        }
-
-        this.setState({
-            highestTab : highestTab,
-            currentTab : newIndex
-        });
+        this.switchTab(newIndex);
     }
 
-    handleBtnClick = (e,newIndex) => {
-        let highestTab = this.state.highestTab;
-        if(newIndex >= highestTab){
-            highestTab = newIndex;
+    switchTab = (newIndex) => {
+        let formElement = document.getElementById(this.formId);
+        if(formElement.reportValidity() !== false){
+            let highestTab = this.state.highestTab;
+            if(newIndex >= highestTab){
+                highestTab = newIndex;
+            }
+            this.setState({
+                highestTab : highestTab,
+                currentTab : newIndex
+            });
         }
-        this.setState({
-            highestTab : highestTab,
-            currentTab : newIndex
-        });
     }
 
     render(){
+        let {onSubmit,content, encType, action} = this.props;
+        if(onSubmit === undefined || !(onSubmit instanceof Function)){
+            onSubmit = (e)=>{};
+        }
         return (
             <div className='breadcrum-container'>
-                <div className="breadcrum-header">
-                    {this.props.content.map((tab,index) => {
-                        let linkClasses = 'breadcrum-tab-link';
-                        if(index <= this.state.highestTab){
-                            linkClasses += ' breadcrum-link-seen';
+                <form id={this.formId} action={action ?? ''} onSubmit={onSubmit} encType={encType ?? ''} >
+                    <div className="breadcrum-header">
+                        {content.map((tab,index) => {
+                            let linkClasses = 'breadcrum-tab-link';
+                            if(index <= this.state.highestTab){
+                                linkClasses += ' breadcrum-link-seen';
+                            }
+                            if(index === parseInt(this.state.currentTab)){
+                                linkClasses += ' breadcrum-link-active';
+                            }
+                            return (
+                                <div className={linkClasses} onClick={(e) => this.handleTabLinkClick(e,index)} key={index}>
+                                    <div className="breadcrum-tab-link-inner-container">
+                                        <span>{index}</span>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    {content.map((tab,index) => {
+                        let elementClasses = 'breadcrum-tab-content'
+                        if(index !== parseInt(this.state.currentTab)){
+                            elementClasses += ' breadcrum-content-hidden'
                         }
-                        if(index === parseInt(this.state.currentTab)){
-                            linkClasses += ' breadcrum-link-active';
+
+                        let prevBtn = <div className="dummy-btn">dummy</div>;
+                        let nextBtn = prevBtn;
+                        if(index !== 0){
+                            prevBtn = <div className="breadcrum-button button-previous" onClick={(e) => this.switchTab(index-1)}>Précédent</div>;
+                        }
+                        if(index !== content.length - 1){
+                            nextBtn = <div className="breadcrum-button button-next" onClick={(e) => this.switchTab(index+1)}>Suivant</div>;
+                        }else{
+                            nextBtn = <button className="breadcrum-button breadcrum-submit-button button-next">Valider</button>
                         }
                         return (
-                            <div className={linkClasses} onClick={(e) => this.handleTabLinkClick(e,index)} key={index}>
-                                <div className="breadcrum-tab-link-inner-container">
-                                    <span>{index}</span>
+                            <div className={elementClasses} key={index}>
+                                <div>{tab}</div>
+                                <div className="breadcrum-content-footer">
+                                    {prevBtn}
+                                    {nextBtn}
                                 </div>
                             </div>
                         );
                     })}
-                </div>
-                {this.props.content.map((tab,index) => {
-                    let elementClasses = 'breadcrum-tab-content'
-                    if(index !== parseInt(this.state.currentTab)){
-                        elementClasses += ' breadcrum-content-hidden'
-                    }
-
-                    let prevBtn = <div className="dummy-btn">dummy</div>;
-                    let nextBtn = prevBtn;
-                    if(index !== 0){
-                        prevBtn = <div className="breadcrum-button button-previous" onClick={(e) => this.handleBtnClick(e,index-1)}>Précédent</div>;
-                    }
-                    if(index !== this.props.content.length - 1){
-                        nextBtn = <div className="breadcrum-button button-next" onClick={(e) => this.handleBtnClick(e,index+1)}>Suivant</div>;
-                    }
-                    return (
-                        <div className={elementClasses} key={index}>
-                            <div>{tab}</div>
-                            <div className="breadcrum-content-footer">
-                                {prevBtn}
-                                {nextBtn}
-                            </div>
-                        </div>
-                    );
-                })}
+                </form>
             </div>
         );
     }
