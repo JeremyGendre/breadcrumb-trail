@@ -1,5 +1,6 @@
 :root {
     --main-color: #4593a1;
+    --main-light-color:#5bb2c1;
     --progress-bar-width:0%;
 }
 .breadcrum-header{
@@ -8,6 +9,9 @@
     margin-bottom: 1em;
     position:relative;
 }
+.breadcrum-content{
+    color:inherit;
+}
 .breadcrum-content-footer{
     margin-top: 1em;
 }
@@ -15,14 +19,14 @@
     border-radius: 50%;
     margin: auto;
     display: inline-block;
-    border: solid 2px white;
+    border: solid 2px lightgrey;
     width:3em;
     background-color: white;
     color:#363636;
     height:3em;
     transition: all 0.15s ease-in-out;
     position: relative;
-    box-shadow: 0 0 4px grey;
+
 }
 
 .breadcrum-tab-link:hover{
@@ -37,8 +41,8 @@
 
 .breadcrum-link-active{
     color: white;
-    background-color: #5bb2c1;
-    border-color: #5bb2c1;
+    background-color: var(--main-light-color);
+    border-color: var(--main-light-color);
     box-shadow: 0 0 10px grey;
 }
 
@@ -88,7 +92,7 @@
 
 .breadcrum-button:hover{
     cursor:pointer;
-    border-color: #5bb2c1;
+    border-color: var(--main-light-color);
 }
 
 .button-next{
@@ -98,12 +102,11 @@
 .breadcrum-submit-button{
     background-color: var(--main-color);
     color:white;
-    box-shadow: 0 0 4px grey;
 }
 
 .breadcrum-submit-button:hover{
-    border:solid 1px #5bb2c1;
-    background-color: #5bb2c1;
+    border:solid 1px var(--main-light-color);
+    background-color: var(--main-light-color);
 }
 
 .dummy-btn{

@@ -54,13 +54,24 @@ export default class BreadcrumTrail extends Component{
     updateProgressBarWidth(){
         let floatWidth = 100 / this.props.content.length;
         let width = (this.state.currentTab * floatWidth) + (floatWidth / 2);
-        document.documentElement.style.setProperty('--progress-bar-width',width + '%');
+        this.setCSSVariableProperty('--progress-bar-width',width + '%');
+    }
+
+    setCSSVariableProperty(property,value){
+        document.documentElement.style.setProperty(property,value);
     }
 
     render(){
-        let {onSubmit,content, encType, action} = this.props;
+        let {onSubmit,content, encType, action, mainColor, mainLightColor} = this.props;
         if(onSubmit === undefined || !(onSubmit instanceof Function)){
             onSubmit = (e)=>{};
+        }
+
+        if(mainColor !== undefined){
+            this.setCSSVariableProperty('--main-color',mainColor);
+        }
+        if(mainLightColor !== undefined){
+            this.setCSSVariableProperty('--main-light-color',mainLightColor);
         }
 
         if(content.length === 0){
@@ -108,7 +119,7 @@ export default class BreadcrumTrail extends Component{
                         }
                         return (
                             <div className={elementClasses} key={index}>
-                                <div>{tab}</div>
+                                <div className="breadcrum-content">{tab}</div>
                                 <div className="breadcrum-content-footer">
                                     {prevBtn}
                                     {nextBtn}

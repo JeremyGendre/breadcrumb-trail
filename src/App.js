@@ -15,7 +15,6 @@ class App extends Component{
                 "test content 2",
                 (<div>test content 3</div>),
                 (<div>test content 4</div>),
-                (<div>test content 5</div>),
             ]
         };
     }
@@ -23,7 +22,10 @@ class App extends Component{
     render (){
         return (
             <div className="main-container">
-                <BreadcrumTrail content={this.state.content} onSubmit={(e)=>{e.preventDefault(); alert('tg');}}/>
+                <BreadcrumTrail
+                    content={this.state.content}
+                    onSubmit={(e)=>{e.preventDefault(); alert('tg');}}
+                />
             </div>
         );
     }
