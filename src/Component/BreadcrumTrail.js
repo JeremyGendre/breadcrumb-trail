@@ -48,10 +48,10 @@ export default function BreadcrumTrail(props){
         onSubmitFunc = (e)=>{};
     }
 
-    if(colors.main !== undefined){
+    if(colors !== undefined && colors.main !== undefined){
         setCSSVariableProperty('--main-color', colors.main);
     }
-    if(colors.background !== undefined){
+    if(colors !== undefined && colors.background !== undefined){
         setCSSVariableProperty('--main-light-color', colors.background);
     }
 
