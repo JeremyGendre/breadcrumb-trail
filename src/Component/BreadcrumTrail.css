@@ -118,7 +118,7 @@
 .submit-btn-disabled{
     background-color: grey;
     border-color: grey;
-    opacity: 0.2;
+    opacity: 0.3;
 }
 .submit-btn-disabled:hover{
     border-color: grey;

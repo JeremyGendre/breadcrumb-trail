@@ -4,7 +4,7 @@ import './BreadcrumTrail.css';
 
 export default function BreadcrumTrail(props){
     const formId = 'form-' + Math.random().toString(36).substr(2, 9);
-    const {onSubmit, content, encType, action, mainColor, mainLightColor, submitting} = props;
+    const {onSubmit, content, encType, action, colors, submitting} = props;
     const [highestTab, setHighestTab] = useState(0);
     const [currentTab, setCurrentTab] = useState(0);
 
@@ -48,11 +48,11 @@ export default function BreadcrumTrail(props){
         onSubmitFunc = (e)=>{};
     }
 
-    if(mainColor !== undefined){
-        setCSSVariableProperty('--main-color', mainColor);
+    if(colors.main !== undefined){
+        setCSSVariableProperty('--main-color', colors.main);
     }
-    if(mainLightColor !== undefined){
-        setCSSVariableProperty('--main-light-color', mainLightColor);
+    if(colors.background !== undefined){
+        setCSSVariableProperty('--main-light-color', colors.background);
     }
 
     if(content.length === 0){
@@ -119,6 +119,5 @@ BreadcrumTrail.propTypes = {
     onSubmit: PropTypes.func,
     encType: PropTypes.string,
     action: PropTypes.string,
-    mainColor: PropTypes.string,
-    mainLightColor: PropTypes.string
+    colors: PropTypes.object,
 };
