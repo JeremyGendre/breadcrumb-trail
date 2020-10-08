@@ -88,6 +88,10 @@
     margin:0.2em;
     padding:0.3em 0.8em 0.3em 0.8em;
     transition: all 0.15s ease-in-out;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .breadcrum-button:hover{
