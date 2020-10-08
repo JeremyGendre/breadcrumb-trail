@@ -92,6 +92,8 @@
 
 .breadcrum-button:hover{
     cursor:pointer;
+    background-color: var(--main-light-color);
+    color: white;
     border-color: var(--main-light-color);
 }
 
