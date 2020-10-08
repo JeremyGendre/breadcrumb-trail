@@ -96,7 +96,8 @@ export default function BreadcrumTrail(props){
                     if(index !== content.length - 1){
                         nextBtn = <div className="breadcrum-button button-next" onClick={(e) => switchTab(index+1)}>Suivant</div>;
                     }else{
-                        nextBtn = <button disabled={submitting ?? false} className="breadcrum-button breadcrum-submit-button button-next">Valider</button>
+                        nextBtn = <button disabled={submitting ?? false}
+                                          className={"breadcrum-button breadcrum-submit-button button-next " + (submitting ? 'submit-btn-disabled' : '')}>Valider</button>
                     }
                     return (
                         <div className={elementClasses} key={index}>

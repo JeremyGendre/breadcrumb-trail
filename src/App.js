@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import BreadcrumTrail from "./Component/BreadcrumTrail";
 
@@ -14,11 +14,20 @@ function App(props){
         (<div>test content 4</div>),
     ];
 
+    const [submitting, setSubmitting] = useState(false);
+
+    function handleSubmit(e){
+        setSubmitting(true);
+        e.preventDefault();
+        console.log('submitting');
+    }
+
     return (
         <div className="main-container">
             <BreadcrumTrail
                 content={content}
-                onSubmit={(e)=>{e.preventDefault(); alert('tg');}}
+                onSubmit={handleSubmit}
+                submitting={submitting}
             />
         </div>
     );
