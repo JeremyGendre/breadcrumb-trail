@@ -115,7 +115,7 @@ export default function BreadcrumTrail(props){
                     }else{
                         nextBtn = <div className="button-next-container">
                             {props.buttons !== undefined && props.buttons.last !== undefined ? props.buttons.last : (
-                                <button disabled={submitting ?? false} className={"breadcrum-button breadcrum-submit-button button-next" + (submitting ? 'submit-btn-disabled' : '')}>Confirm</button>
+                                <button disabled={submitting ?? false} className={"breadcrum-button breadcrum-submit-button button-next " + (submitting ? 'submit-btn-disabled' : '')}>Confirm</button>
                             )}
                         </div>
                     }
