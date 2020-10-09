@@ -2,6 +2,24 @@ import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import './BreadcrumTrail.css';
 
+function manageThemeColor(colors){
+    if(colors !== undefined){
+        if(colors.main !== undefined){
+            setCSSVariableProperty('--main-color', colors.main);
+        }
+        if(colors.background !== undefined){
+            setCSSVariableProperty('--main-light-color', colors.background);
+        }
+        if(colors.progress !== undefined){
+            setCSSVariableProperty('--main-progress-color', colors.progress);
+        }
+    }
+}
+
+function setCSSVariableProperty(property,value){
+    document.documentElement.style.setProperty(property,value);
+}
+
 export default function BreadcrumTrail(props){
     const formId = 'form-' + Math.random().toString(36).substr(2, 9);
     const {onSubmit, content, encType, action, colors, submitting} = props;
@@ -39,21 +57,12 @@ export default function BreadcrumTrail(props){
         setCSSVariableProperty('--progress-bar-width',width + '%');
     }
 
-    function setCSSVariableProperty(property,value){
-        document.documentElement.style.setProperty(property,value);
-    }
-
     let onSubmitFunc = onSubmit;
     if(onSubmitFunc === undefined || !(onSubmitFunc instanceof Function)){
         onSubmitFunc = (e)=>{};
     }
 
-    if(colors !== undefined && colors.main !== undefined){
-        setCSSVariableProperty('--main-color', colors.main);
-    }
-    if(colors !== undefined && colors.background !== undefined){
-        setCSSVariableProperty('--main-light-color', colors.background);
-    }
+    manageThemeColor(colors);
 
     if(content.length === 0){
         return (<div>No data given to form</div>);
@@ -91,13 +100,24 @@ export default function BreadcrumTrail(props){
                     let prevBtn = <div className="dummy-btn">dummy</div>;
                     let nextBtn = prevBtn;
                     if(index !== 0){
-                        prevBtn = <div className="breadcrum-button button-previous" onClick={(e) => switchTab(index-1)}>Précédent</div>;
+                        prevBtn = <div className="button-previous-container" onClick={(e) => switchTab(index-1)}>
+                                {props.buttons !== undefined && props.buttons.previous !== undefined ? props.buttons.previous : (
+                                    <div className="breadcrum-button button-previous">Previous</div>
+                                )}
+                        </div>;
                     }
                     if(index !== content.length - 1){
-                        nextBtn = <div className="breadcrum-button button-next" onClick={(e) => switchTab(index+1)}>Suivant</div>;
+                        nextBtn = <div className="button-next-container" onClick={(e) => switchTab(index+1)}>
+                            {props.buttons !== undefined && props.buttons.next !== undefined ? props.buttons.next : (
+                                <div className="breadcrum-button button-next">Next</div>
+                            )}
+                        </div>;
                     }else{
-                        nextBtn = <button disabled={submitting ?? false}
-                                          className={"breadcrum-button breadcrum-submit-button button-next " + (submitting ? 'submit-btn-disabled' : '')}>Valider</button>
+                        nextBtn = <div className="button-next-container">
+                            {props.buttons !== undefined && props.buttons.last !== undefined ? props.buttons.last : (
+                                <button disabled={submitting ?? false} className={"breadcrum-button breadcrum-submit-button button-next" + (submitting ? 'submit-btn-disabled' : '')}>Confirm</button>
+                            )}
+                        </div>
                     }
                     return (
                         <div className={elementClasses} key={index}>
@@ -120,4 +140,5 @@ BreadcrumTrail.propTypes = {
     encType: PropTypes.string,
     action: PropTypes.string,
     colors: PropTypes.object,
+    buttons:PropTypes.object
 };
