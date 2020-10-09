@@ -135,10 +135,10 @@ export default function BreadcrumTrail(props){
 }
 
 BreadcrumTrail.propTypes = {
-    content: PropTypes.array,
-    onSubmit: PropTypes.func,
-    encType: PropTypes.string,
     action: PropTypes.string,
+    buttons:PropTypes.object,
     colors: PropTypes.object,
-    buttons:PropTypes.object
+    content: PropTypes.array,
+    encType: PropTypes.string,
+    onSubmit: PropTypes.func
 };

@@ -1,6 +1,48 @@
+##Installation
+
+Since there's no npm package for this component, you'll have to fork this repository in order to take the component source code.
+All the files you need to copy are in the `src/Component` directory. Every other files are only for the dev / tests / demo project and are completely useless to copy.
+
+Once you copied the files into your project, you're done ! You can use the component. Just make sure to use the correct path when importing the component, and that's it !
+
+##Usage
+
+A basic usage will be : 
+```javascript
+import React from 'react';
+import BreadcrumTrail from "path/to/the/component/directory";
+
+function myComponent(props){
+    return (
+        <>
+            ...
+            <BreadcrumTrail prop1={prop1Value} prop2={prop2value}/>
+            ...
+        </>
+    );
+}
+```
+
+##Properties
+
+First thing to know : neither of these properties are required to make the BreadcrumTrail component works.
+However, obviously, you will need to make sure to give at least 1 or 2 elements to the `content` property because this is the prop which determine all of your content.
+If it is empty, the component will basically display nothing and has no reasons to exist. 
+
+Property | Type | Description | Usage (value example)
+--- | --- | --- | ---
+**action** | `string` | The value which will be put in the `action` html property of the `<form>` tag. | `"/path/to/submit"`
+**buttons** | `object` | The 3 possibles buttons in the component : `previous`, `next` and `last`. | `{ previous : <>Custom Previous</>, ...}`
+**colors** | `object` | The different colors available in the component : `main`, `background` and `progress`. You can give them any valid css color value | `{ main : "#fefefe", ...}`
+**content** | `array` | The different tabs that will be displayed. For each element of the given array, a tab is created | `[<div>First element <strong>Yeepee</strong></div>, ...]`
+**encType** | `string` | The value which will be put in the `enctype` html property of the `<form>` tag. | `"multipart/form-data"`
+**onSubmit** | `callback` | The callback used when the form is submitted | `myHandleSubmit` (or, of course, every function name) with, obviously, a previous declaration like : `function myHandleSubmit(){ alert('submitted'); }`
+
+#Project generalities (not part of the documentation)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
