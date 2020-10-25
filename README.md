@@ -37,6 +37,7 @@ Property | Type | Description | Usage (value example)
 **content** | `array` | The different tabs that will be displayed. For each element of the given array, a tab is created | `[<div>First element <strong>Yeepee</strong></div>, ...]`
 **encType** | `string` | The value which will be put in the `enctype` html property of the `<form>` tag. | `"multipart/form-data"`
 **onSubmit** | `callback` | The callback used when the form is submitted | `myHandleSubmit` (or, of course, every function name) with, obviously, a previous declaration like : `function myHandleSubmit(){ alert('submitted'); }`
+**submitting** | `boolean` | Say if the form is submitting | `true` or `false`
 
 # Project generalities (not part of the documentation)
 

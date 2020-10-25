@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {FormEvent, ReactNode, useState} from 'react';
 import './App.css';
 import BreadcrumTrail from "./Component/BreadcrumTrail";
 
-function App(props){
+function App(){
     // it can of course be a state, but here for the test it's just a simple const
-    const content = [
+    const content: Array<ReactNode> = [
         <div>
             test content 1 <br/>
             <input type="text" placeholder="dummy input test 1" required/>
@@ -16,10 +16,9 @@ function App(props){
 
     const [submitting, setSubmitting] = useState(false);
 
-    function handleSubmit(e){
-        setSubmitting(true);
+    function handleSubmit(e: FormEvent){
         e.preventDefault();
-        console.log('submitting');
+        setSubmitting(true);
     }
 
     return (
