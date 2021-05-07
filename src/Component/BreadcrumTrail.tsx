@@ -71,8 +71,8 @@ export default function BreadcrumTrail(props: Props){
     }
 
     function updateProgressBarWidth(){
-        let floatWidth = 100 / props.content.length;
-        let width = (currentTab * floatWidth) + (floatWidth / 2);
+        const floatWidth = 100 / props.content.length;
+        const width = (currentTab * floatWidth) + (floatWidth / 2);
         setCSSVariableProperty('--progress-bar-width',width + '%');
     }
 
